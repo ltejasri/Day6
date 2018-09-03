@@ -1,91 +1,92 @@
 package com.capgemini.day6.domain;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.Objects;
 
-import org.junit.jupiter.api.Test;
-
-class Car {
-
+public class Car implements Comparable<Car>{
+	
 	private String make;
 	private String model;
 	private int year;
-	private double price;
+	private long price;
+	
 	public Car() {
 		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Car(String make, String model, int year, long price) {
+		super();
+		this.make = make;
+		this.model = model;
+		this.year = year;
+		this.price = price;
+	}
+
+	public String getMake() {
+		return make;
+	}
+
+	public void setMake(String make) {
+		this.make = make;
+	}
+
+	public String getModel() {
+		return model;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	public int getYear() {
+		return year;
+	}
+
+	public void setYear(int year) {
+		this.year = year;
+	}
+
+	public long getPrice() {
+		return price;
+	}
+
+	public void setPrice(long price) {
+		this.price = price;
+	}
+
+	@Override
+	public String toString() {
+		//return "Car [make=" + make + ", model=" + model + ", year=" + year + ", price=" + price + "]";
+		return "make=" + make + " model=" + model;
 	}
 	
-public Car(String make, String model, int year, double price) {
-	this();		
-	this.make = make;
-	this.model = model;
-	this.year = year;
-	this.price = price;
-	
-
-}
-
-public String getMake() {
-	return make;
-}
-
-public void setMake(String make) {
-	this.make = make;
-}
-
-public String getModel() {
-	return model;
-}
-
-public void setModel(String model) {
-	this.model = model;
-}
-
-public int getYear() {
-	return year;
-}
-
-public void setYear(int year) {
-	this.year = year;
-}
-
-public double getPrice() {
-	return price;
-}
-
-public void setPrice(double price) {
-	this.price = price;
-}
-
-@Override
-public int hashCode() {
-	final int prime = 31;
-	int result = 1;
-	result = prime * result + ((make == null) ? 0 : make.hashCode());
-	result = prime * result + ((model == null) ? 0 : model.hashCode());
-	long temp;
-	
-	return result;
-}
-
-@Override
-public boolean equals(Object obj) {
-	if (this == obj)
-		return true;
-	if (obj == null)
-		return false;
-	if (getClass() != obj.getClass())
-		return false;
-	Car other = (Car) obj;
-	if (make == null) {
-		if (other.make != null)
+	@Override
+	public boolean equals(Object obj) {
+		if(this == obj)
+			return true;
+		if(obj == null)
 			return false;
-	} else if (!make.equals(other.make))
-		return false;
-	if (model == null) {
-		if (other.model != null)
+		if(this.getClass()!= obj.getClass())
 			return false;
+		
+		Car car=(Car) obj;
+		return this.model==car.model && this.make==car.make;
+		
 	}
-	return true;
-}
+	
+	@Override
+	public int hashCode() {
+	return Objects.hash(model,make);
+	}
+
+	@Override
+	public int compareTo(Car c) {
+		int result=this.make.compareTo(c.make);
+		if(result==0)
+			return this.model.compareTo(c.model);
+		return result;
+	}
+	
+	
 
 }
